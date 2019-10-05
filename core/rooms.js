@@ -1,3 +1,5 @@
+const ObjectID = require('mongodb').ObjectID
+const util = require('./utility')
 const mongo = require('./mongo')
 
 async function addRoom(payload) {
@@ -10,8 +12,10 @@ async function addRoom(payload) {
 
 exports.addRoom = addRoom
 
-async function delRoom(id) {
-  await mongo.collection('rooms').deleteOne()
+async function delRoom(objectID) {
+  await mongo.collection('rooms').deleteOne({
+    '_id': ObjectID(objectID)
+  })
 }
 
 async function getRoom(user) {
@@ -27,3 +31,19 @@ async function getRooms() {
 }
 
 exports.getRooms = getRooms
+
+async function leaveRoom(user) {
+  const room = await getRoom(user)
+  const members = room.members
+  util.removeItem(members, user)
+  if (members.length == 0) await delRoom(room._id)
+  else await updateRoom(room._id, {members: members})
+}
+
+exports.leaveRoom = leaveRoom
+
+async function updateRoom(objectID, payload) {
+  await mongo.collection('rooms').updateOne({
+    '_id': ObjectID(objectID)
+  }, {$set: {...payload}})
+}

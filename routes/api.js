@@ -9,10 +9,13 @@ router.get('/ping', (req, res) => {
 module.exports = router
 
 router.post('/create-room', async (req, res) => {
-  await rooms.addRoom({
-    ...req.body,
-    user: req.user
-  })
+  if (req.user) {
+    await rooms.addRoom({
+      ...req.body,
+      user: req.user
+    })
+  }
+  res.end()
 })
 
 router.get('/get-room', async (req, res) => {
@@ -29,4 +32,9 @@ router.get('/in-room', async (req, res) => {
   const room = await rooms.getRoom(req.user)
   if (room) res.send(true)
   else res.send(false)
+})
+
+router.post('/leave-room', async (req, res)=> {
+  await rooms.leaveRoom(req.user)
+  res.end()
 })

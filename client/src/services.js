@@ -19,3 +19,7 @@ export function GetRoom(payload) {
 export function InRoom(){
   return axios.get('/api/in-room');
 }
+
+export function LeaveRoom(){
+  return axios.post('/api/leave-room');
+}

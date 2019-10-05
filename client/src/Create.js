@@ -24,18 +24,18 @@ function Create(props) {
         value={desc}
         onChange={evt => setDesc(evt.target.value)} />
       </label><br/>
-    <button type="submit" className='box-link'>Create</button>
+    <button type="submit" className='box-link' onClick={() =>createRoom()} disabled={!name}>Create</button>
     </form>
     <Link to='/auth/menu' className='box-link'>Cancel</Link>
     </Container>
   )
 
   async function createRoom() {
-    const roomID = await CreateRoom({
+    await CreateRoom({
       name: name,
       desc: desc,
     })
-    // props.history.push('/room?id=' + roomID)
+     props.history.push('/auth/room');
   }
 
 }

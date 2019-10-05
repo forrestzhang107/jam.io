@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { GetRoom } from './services'
-
+import { GetRoom, LeaveRoom } from './services'
 function Room(props) {
 
   const [data, setData] = useState(null)
@@ -15,7 +14,7 @@ function Room(props) {
     <Container>
     <h3 className='title'>{data ? data.name : ''}</h3>
     {renderData()}
-    <div className='box-link'>Leave</div>
+    <div className='box-link' onClick={() => leaveRoom()}>Leave</div>
     </Container>
   )
 
@@ -42,7 +41,10 @@ function Room(props) {
   async function getData() {
     setData((await GetRoom()).data)
   }
-
+  async function leaveRoom() {
+    await LeaveRoom()
+    props.history.push('/auth/menu');
+  }
 }
 
 export default Room

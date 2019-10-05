@@ -7,7 +7,7 @@ import Create from './Create'
 import Join from './Join'
 import Recordings from './Recordings'
 import Room from './Room'
-import "./App.css";
+
 
 function App() {
   return (

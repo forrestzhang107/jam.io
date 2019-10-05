@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react'
 import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { Logout, InRoom } from './services'
-import "./App.css";
+
 function Menu() {
 
   // JSX
   const [roomJoined, setRoomJoined] = useState(false);
   useEffect(() => {
     async function check(){
-      if(await InRoom()){
+      if(await InRoom() === "true"){
         setRoomJoined(true)
       }
     }

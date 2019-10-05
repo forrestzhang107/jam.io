@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import {GetRooms} from './services';
 
 function Join(props) {
 
   const [data, setData] = useState(null)
   useEffect(() => {
-    // const data = await GetRooms()
-    // setData(data)
+    async function getRooms(){
+      const res = (await GetRooms())
+    setData(res.data)
+    console.log('rooms',res.data);
+    }
+    getRooms()
   }, [])
   
   return (
@@ -22,9 +27,14 @@ function Join(props) {
     if (data) {
       if (data.length === 0) return <div className='center mb-16'>No rooms to display.</div>
       else return (
-        data.map(room => {
-          // render one room
-        })
+        <Row>
+        {data.map(room => 
+          <Col className="room col-6">
+              <div>{room.name}</div>
+              <div>{room.desc}</div>
+          </Col>
+        )}
+        </Row>
       )
     }
   }

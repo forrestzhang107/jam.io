@@ -109,10 +109,20 @@ h3 {
 }
 
 .row {
-  display: block;
+  /* display: block; */
   margin-right: inherit;
   margin-left: inherit;
 }
 .box-link{
   background-color: green;
+}
+.member{
+  max-height: 50%;
+  max-width: 50%;
+  overflow: hidden;
+}
+.room{
+  position: relative;
+  max-height: 200px;
+  overflow: hidden;
 }

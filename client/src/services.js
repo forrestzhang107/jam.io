@@ -23,3 +23,7 @@ export function InRoom(){
 export function LeaveRoom(){
   return axios.post('/api/leave-room');
 }
+
+export function GetRooms(){
+  return axios.get('/api/get-rooms');
+}

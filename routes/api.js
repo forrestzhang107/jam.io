@@ -19,3 +19,14 @@ router.get('/get-room', async (req, res) => {
   const room = await rooms.getRoom(req.user)
   res.send(room)
 })
+
+router.get('/get-rooms', async (req, res) => {
+  const data = await rooms.getRooms()
+  res.send(data)
+})
+
+router.get('/in-room', async (req, res) => {
+  const room = await rooms.getRoom(req.user)
+  if (room) res.send(true)
+  else res.send(false)
+})

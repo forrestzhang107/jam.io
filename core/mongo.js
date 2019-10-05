@@ -1,8 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://forrest:forrest123@ds137283.mlab.com:37283/options"
+const url = 'mongodb+srv://forrest:forrest123@cluster0-1kteo.mongodb.net/admin'
 
 let db
-const tag = 'lambda'
 
 async function init() {
   if(!db) await connect()
@@ -15,7 +14,7 @@ async function connect() {
 }
 
 function getDB() {
-  return db.db("options")
+  return db.db("cluster0")
 }
 
 exports.getDB = getDB

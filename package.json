@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/forrestzhang107/5g-hackathon#readme",
   "dependencies": {
+    "@cloudant/cloudant": "^4.2.1",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.2",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "mongodb": "~3.0.8",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }

@@ -9,7 +9,8 @@ function Menu() {
   const [roomJoined, setRoomJoined] = useState(false);
   useEffect(() => {
     async function check(){
-      if(await InRoom() === "true"){
+      const inRoom = (await InRoom()).data
+      if(inRoom){
         setRoomJoined(true)
       }
     }

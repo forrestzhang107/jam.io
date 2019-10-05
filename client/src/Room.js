@@ -10,10 +10,17 @@ function Room(props) {
     getData()
   }, [])
 
+  useEffect(() => {
+    setInterval(async() => {
+      getData()
+    }, 1000)
+  }, [])
+
   return (
     <Container>
     <h3 className='title'>{data ? data.name : ''}</h3>
     {renderData()}
+    <div className='box-link'>Start Session</div>
     <div className='box-link' onClick={() => leaveRoom()}>Leave</div>
     </Container>
   )
@@ -25,11 +32,11 @@ function Room(props) {
         <div className='mb-16'>
         {data.desc}
         </div>
-        <Row className='mb-16'>
         <div>Performers:</div>
+        <Row className='mb-16'>
         {data.members.map(user =>
-          <Col className='member col-6'>
-          {user}
+          <Col key={user} className='col-6'>
+          <div className='member'>{user}</div>
           </Col>
         )}
         </Row>

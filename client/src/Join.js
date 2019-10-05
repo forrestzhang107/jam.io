@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import {GetRooms} from './services';
+import {GetRooms, JoinRoom} from './services';
 
 function Join(props) {
 
@@ -14,7 +14,7 @@ function Join(props) {
     }
     getRooms()
   }, [])
-  
+
   return (
     <Container>
     <h3 className='title'>Join Room</h3>
@@ -28,15 +28,19 @@ function Join(props) {
       if (data.length === 0) return <div className='center mb-16'>No rooms to display.</div>
       else return (
         <Row>
-        {data.map(room => 
-          <Col className="room col-6">
-              <div>{room.name}</div>
-              <div>{room.desc}</div>
+        {data.map(room =>
+          <Col className="col-6">
+              <div onClick={() => joinRoom(room._id)} className='room'>{room.name}</div>
           </Col>
         )}
         </Row>
       )
     }
+  }
+
+  async function joinRoom(objectID) {
+    await JoinRoom({objectID: objectID})
+    props.history.push('/auth/room')
   }
 
 }

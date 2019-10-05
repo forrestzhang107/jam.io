@@ -27,3 +27,7 @@ export function LeaveRoom(){
 export function GetRooms(){
   return axios.get('/api/get-rooms');
 }
+
+export function JoinRoom(payload) {
+  return axios.post('/api/join-room', payload)
+}

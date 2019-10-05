@@ -15,3 +15,7 @@ export function CreateRoom(payload) {
 export function GetRoom(payload) {
   return axios.get('/api/get-room')
 }
+
+export function InRoom(){
+  return axios.get('/api/in-room');
+}

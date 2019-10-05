@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom'
 function Join(props) {
 
   const [data, setData] = useState(null)
-
   useEffect(() => {
     // const data = await GetRooms()
     // setData(data)
   }, [])
-
+  
   return (
     <Container>
     <h3 className='title'>Join Room</h3>

@@ -62,3 +62,10 @@ async function joinRoom(payload) {
 }
 
 exports.joinRoom = joinRoom
+
+async function updateRoomChannel(user, channelID) {
+    const room = await getRoom(user)
+    await updateRoom(room._id, {channelID: channelID})
+}
+
+exports.updateRoomChannel = updateRoomChannel

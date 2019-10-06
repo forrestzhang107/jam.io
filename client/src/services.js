@@ -124,10 +124,6 @@ export function JoinRoom(payload) {
   return axios.post('/api/join-room', payload)
 }
 
-export function UploadFile(payload){
-  return axios.post('/api/uploadFile', payload)
-}
-
-export function GetFile(){
-  return axios.get('api/getFile')
+export function GetRecordings() {
+  return axios.get('/api/get-file-lists')
 }

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import {GetFile} from './services';
+import {GetRecordings} from './services'
 
 function Recordings(props) {
 
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    async function getFiles() {
-    const data = await GetFile()
-    console.log(data);
-    setData(data)
+    async function getRecordings() {
+    const res = await GetRecordings()
+    console.log(res.data);
+    setData(res.data)
     }
-    getFiles();
+    getRecordings();
   }, [])
 
   return (
@@ -28,13 +28,19 @@ function Recordings(props) {
     if (data) {
       if (data.length === 0) return <div className='center mb-16'>No recordings to display.</div>
       else return (
-        data.map(recording => 
-          console.log(recording)
-        )
+        <Row>
+        {data.map(recording =>
+          <Col className="col-6">
+              <div onClick={()=> {viewRecording(recording)}} className='room'>{recording}</div>
+          </Col>
+        )}
+        </Row>
       )
     }
   }
-
+  async function viewRecording(recording) {
+    props.history.push('/auth/recording?id=' + recording)
+  }
 }
 
 export default Recordings

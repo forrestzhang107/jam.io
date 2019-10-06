@@ -7,6 +7,7 @@ import Create from './Create'
 import Join from './Join'
 import Recordings from './Recordings'
 import Room from './Room'
+import Recording from './Recording'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/auth/join' component={ Join } />
         <Route path='/auth/recordings' component={ Recordings } />
         <Route path='/auth/room' component={ Room } />
+        <Route path='/auth/recording' component={Recording} /> 
         <Redirect from='/' to='/login' />
       </Switch>
     </BrowserRouter>

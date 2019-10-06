@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const rooms = require('../core/rooms')
-
+const s3 = require('../core/s3')
 router.get('/ping', (req, res) => {
   res.send('pong')
 })
@@ -31,6 +31,11 @@ router.get('/get-rooms', async (req, res) => {
 router.get('/in-room', async (req, res) => {
   const room = await rooms.getRoom(req.user)
   if (room) res.send(true)
+  else res.send(false)
+})
+router.get('/get-file-lists', async (req, res) => {
+  const lists = await s3.getFileLists()
+  if (lists) res.send(lists)
   else res.send(false)
 })
 

@@ -6,6 +6,8 @@ async function addRoom(payload) {
   await mongo.collection('rooms').insertOne({
     name: payload.name,
     desc: payload.desc,
+    broadcaster: payload.broadcaster,
+    room_token: payload.room_token,
     members: [payload.user],
   })
 }

@@ -202,13 +202,18 @@
 
                 function captureUserMedia(callback, failure_callback) {
                     var video = document.getElementById('video');
-
-                    navigator.getUserMedia({video: true, audio: {latency: 0.00,
+                    var context = new AudioContext({
+                                      latencyHint: 0,
+                                      sampleRate: 44100,
+                                    });
+                    navigator.getUserMedia({video: true, audio: {latency: 0.02,
                             echoCancellation: false,
-                            mozNoiseSuppression: false,
-                            mozAutoGainControl: false}},
+                            noiseSuppression: false,
+                            autoGainControl: false}},
                         function(stream) {
                             console.log('received Stream callback from getUserMedia', stream)
+                            var source = context.createMediaStreamSource(stream);
+                            source.connect(context.destination);
                             conferenceConfig.attachStream = stream;
                             video.srcObject = stream;
                             // var mediaElement = getMediaElement(video, {

@@ -35,8 +35,7 @@ function Recording(props) {
     if (streamLink) {
      return (
         <Row>
-            <source src={streamLink} type="video.mp4"
-media="screen and (min-width:320px)"></source>
+            <iframe className="video-center" src={"https://www.youtube.com/embed/qFIlGLnjn7g"} frameBorder="0"></iframe>
         </Row>
       )
     }

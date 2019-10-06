@@ -114,6 +114,8 @@
                     },
                     onRoomFound: function(room) {
 
+                      console.log('attempting onRoomFound')
+
                         if (onRoomFound) return
                         onRoomFound = true
 
@@ -145,7 +147,7 @@
                         }, function() {
                             joinRoomButton.disabled = false;
                         });
-                        
+
                     },
                     onRoomClosed: function(room) {
                       console.log('onRoomClosed')
@@ -160,32 +162,34 @@
                     },
                     onReady: function() {
 
+                      console.log('attempting onReady')
+
                       if (onReady) return
                       onReady = true
 
                       console.log('onReady')
 
-                      captureUserMedia(function() {
-                      conferenceUI.createRoom({
-                              roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
-                          });
-                      }, function() {
-                          btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
-                      });
+                      // captureUserMedia(function() {
+                      // conferenceUI.createRoom({
+                      //         roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
+                      //     });
+                      // }, function() {
+                      //     btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
+                      // });
 
                         // var intention = localStorage.getItem("user_intention");
                         // if(intention == "join"){
 
                         // } else{
-                        // setTimeout(()=>{
-                        //     captureUserMedia(function() {
-                        //     conferenceUI.createRoom({
-                        //             roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
-                        //         });
-                        //     }, function() {
-                        //         btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
-                        //     });
-                        // }, 3000)
+                        setTimeout(()=>{
+                            captureUserMedia(function() {
+                            conferenceUI.createRoom({
+                                    roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
+                                });
+                            }, function() {
+                                btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
+                            });
+                        }, 5000)
 
                         // }
 

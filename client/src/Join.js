@@ -9,8 +9,7 @@ function Join(props) {
   useEffect(() => {
     async function getRooms(){
       const res = (await GetRooms())
-    setData(res.data)
-    console.log('rooms',res.data);
+      setData(res.data)
     }
     getRooms()
   }, [])
@@ -19,7 +18,7 @@ function Join(props) {
     <Container>
     <h3 className='title'>Join Room</h3>
     {renderRooms()}
-    <Link to='/auth/menu' className='box-link'>Cancel</Link>
+    <Link to='/auth/menu' className='box-link cancel'>Cancel</Link>
     </Container>
   )
 

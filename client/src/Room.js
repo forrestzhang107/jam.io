@@ -21,7 +21,7 @@ function Room(props) {
     <h3 className='title'>{data ? data.name : ''}</h3>
     {renderData()}
     <div className='box-link'>Start Session</div>
-    <div className='box-link' onClick={() => leaveRoom()}>Leave</div>
+    <div className='box-link cancel' onClick={() => leaveRoom()}>Leave</div>
     </Container>
   )
 

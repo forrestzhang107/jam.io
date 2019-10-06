@@ -3,8 +3,8 @@ const fs = require('fs')
 
 const s3 = new aws.S3({
   region: 'us-west-1',
-  accessKeyId: 'AKIA5BSLTI7EMW34YDNJ',
-  secretAccessKey: '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'
+  accessKeyId: '',
+  secretAccessKey: '' 
 })
 
 const path = 'videos/'

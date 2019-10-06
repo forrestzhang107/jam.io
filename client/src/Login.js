@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { Authenticate } from './services'
 
 function Login() {
@@ -17,9 +18,10 @@ function Login() {
 
   return (
     <Container>
-    <h2 className='logo'>Jam.io</h2>
+    <h2 className='login-logo'>Jam.io</h2>
     {renderErrorMessage()}
-    <form onSubmit={evt => {evt.preventDefault(); login()}}>
+    <form onSubmit={evt => evt.preventDefault()}>
+      <div className='login-form'>
       <label className='fluid'>
         Username: <br/>
         <input className='fluid' type="text"
@@ -32,13 +34,18 @@ function Login() {
         value={pass}
         onChange={evt => setPass(evt.target.value)} />
       </label><br/>
-    <button type="submit" className='box-link'>Login</button>
+      </div>
+    <div onClick={() => login()}>
+    <div className='button-wrapper'>
+    <button type='submit'>Login</button>
+    </div>
+    </div>
     </form>
     </Container>
   )
 
   function renderErrorMessage() {
-    if(errorMessage) return <p className='mb-16'>{errorMessage}</p>
+    if(errorMessage) return <p className='center mb-16'>{errorMessage}</p>
   }
 
   // Helpers

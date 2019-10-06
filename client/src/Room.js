@@ -23,9 +23,14 @@ function Room(props) {
     <Container>
     <h3 className='title'>{data ? data.name : ''}</h3>
     {renderData()}
+<<<<<<< HEAD
     <video id="video_stream" style={{width: "92vw"}} autoPlay={true} muted={true}/>
       <div className='box-link'>Start Session</div>
     <div className='box-link' onClick={() => leaveRoom()}>Leave</div>
+=======
+    <div className='box-link'>Start Session</div>
+    <div className='box-link cancel' onClick={() => leaveRoom()}>Leave</div>
+>>>>>>> 6763868b367ce17c0cfc75c9bba7de8b3ebf8d54
     </Container>
   )
 

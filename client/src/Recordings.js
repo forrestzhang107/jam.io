@@ -15,7 +15,7 @@ function Recordings(props) {
     <Container>
     <h3 className='title'>Recordings</h3>
     {renderRecordings()}
-    <Link to='/auth/menu' className='box-link'>Cancel</Link>
+    <Link to='/auth/menu' className='box-link cancel'>Cancel</Link>
     </Container>
   )
 

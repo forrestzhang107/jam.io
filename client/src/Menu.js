@@ -20,7 +20,7 @@ function Menu() {
   },[])
 
   return (
-    <Container>
+    <Container className='menu-bg'>
     <h2 className='logo'>Jam.io</h2>
 
     {create ? (<Link to='/auth/create' className='box-link'>Create Room</Link>) : ("")}

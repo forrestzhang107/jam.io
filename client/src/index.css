@@ -1,9 +1,20 @@
+#root {
+  height: 100%;
+}
+
 :root {
   --theme-color: #2e2e33;
+  --light-black: #3A3C41;
+}
+
+html {
+  height: 100%;
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +27,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.menu-bg {
+  background-image: url('./gradient-bg.png');
+  background-size: cover;
+  height: 100%;
 }
 
 .container {
@@ -37,12 +54,26 @@ code {
 
 .logo {
   margin-top: 60px;
+  margin-bottom: 160px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 60px;
+  text-transform: lowercase;
+}
+
+.login-logo {
+  margin-top: 60px;
   margin-bottom: 50px;
   text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 60px;
+  text-transform: lowercase;
 }
 
 .title {
-  margin-top: 40px;
+  margin-top: 25px;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -61,10 +92,16 @@ a:focus {
   width: 100%;
 }
 
-/** temporary to make inputs visible - remove before deployment **/
 input, textarea {
-  border: 1px solid #aaa;
-  padding: 5px;
+  outline: none;
+  border: none;
+  padding: 10px;
+  background-color: #3A3C41;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, .4);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 2px;
+  border-radius: 10px;
 }
 
 input {
@@ -75,20 +112,42 @@ input:focus, textarea:focus {
   outline: none;
 }
 
-button {
-  color: white;
-}
-
 .box-link {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  width: 100%;
-  outline: 1px solid #555;
-  margin: 10px 0;
+  line-height: 53px;
+  outline: none;
+  margin: 24px 20px;
   display: block;
-  background: none;
   border: none;
   text-align: center;
+  background-color: #7914D1;
+  border-radius: 30px;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, .4);
+  font-family: 'Nunito', sans-serif;
+}
+
+.cancel {
+  background-color: #D11414;
+}
+
+button {
+  color: white;
+  background: none;
+  border: none;
+  width: 100%;
+
+  background-color: #7914D1;
+  line-height: 53px;
+
+  cursor: pointer;
+  text-align: center;
+  border-radius: 30px;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, .4);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+}
+
+.button-wrapper {
+  margin: 24px 20px;
 }
 
 .member {
@@ -104,7 +163,14 @@ button {
 }
 
 h3 {
-  font-size: 1.5em;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 53px;
+  background-color: #26272A;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 .desc-box {
@@ -117,9 +183,6 @@ h3 {
   margin-right: -8px;
   margin-left: -8px;
 }
-.box-link{
-  background-color: green;
-}
 .col-6 {
   padding-left: 8px;
   padding-right: 8px;
@@ -128,15 +191,18 @@ h3 {
   position: relative;
   height: 150px;
   overflow: hidden;
-  border: 1px solid white;
   border-radius: 10px;
   padding: 15px;
   text-align: center;
-  /* margin-left: 5px;
-  margin-right: 5px; */
+  background-color: var(--light-black);
   margin-bottom: 16px;
+  box-shadow: 0 2px 13px rgba(0, 0, 0, .4);
 }
 
 .disabled {
   color: #aaa;
+}
+
+.login-form {
+  margin: 0 20px;
 }

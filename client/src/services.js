@@ -8,7 +8,7 @@ var config = {
     var SIGNALING_SERVER = 'https://socketio-over-nodejs2.herokuapp.com:443/',
         defaultChannel = window.location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
 
-    var channel = config.channel || defaultChannel;
+    var channel = "another-unique";
     var sender = Math.round(Math.random() * 999999999) + 999999999;
 
     io.connect(SIGNALING_SERVER).emit('new-channel', {
@@ -32,9 +32,21 @@ var config = {
     socket.on('message', config.onmessage);
   },
   onRemoteStream: function(event) {
-    console.log("event");
+    console.log("remote stream event");
        document.body.appendChild(event.media);
-   }
+   },
+   onRoomFound: function(room) {
+        console.log("in on room found");
+
+            // captureUserMedia(function() {
+            //     conferenceUI.joinRoom({
+            //         roomToken: roomToken,
+            //         joinUser: broadcaster
+            //     });
+            // }, function() {
+            //     joinRoomButton.disabled = false;
+            // });
+    }
 }
 
 export function Stream(){
@@ -61,7 +73,7 @@ export function CreateRoomStream(){
       console.log("window._stream: ", window._stream);
       var conf = conference(config);
       var room_info = conf.createRoom({
-          roomName: '09876545'
+          roomName: 'Anonymous'
       });
       console.log("room_info: ", room_info);
       resolve(room_info);
@@ -83,7 +95,7 @@ export function JoinRoomStream(room_info){
         })
       var conf = conference(config);
       conf.joinRoom({
-            roomToken: room_info.broadcaster,
+            roomToken: room_info.roomToken,
             joinUser: room_info.broadcaster
         });
       resolve();

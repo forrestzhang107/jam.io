@@ -295,7 +295,9 @@ var conference = function(config) {
                     defaultSocket.send({
                         participant: true,
                         userToken: self.userToken,
-                        joinUser: _config.joinUser
+                        joinUser: _config.joinUser,
+                        roomToken: self.roomToken,
+                        roomName: self.roomName
                     });
                 }
             });

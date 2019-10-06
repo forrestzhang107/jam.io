@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { CreateRoom } from './services'
+import { CreateRoom, CreateRoomStream } from './services'
+
 
 function Create(props) {
 
@@ -31,11 +32,18 @@ function Create(props) {
   )
 
   async function createRoom() {
+    var room_info = await CreateRoomStream();
     await CreateRoom({
       name: name,
       desc: desc,
+      room_name: room_info.roomName,
+      room_token: room_info.roomToken,
+      broadcaster: room_info.broadcaster
     })
-     props.history.push('/auth/room');
+
+    // setTimeout(()=>{
+       props.history.push('/auth/room');
+    // }, 5000)
   }
 
 }

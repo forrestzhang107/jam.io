@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { JoinRoomStream } from './services'
 
 function Join(props) {
 
@@ -9,10 +10,11 @@ function Join(props) {
     // const data = await GetRooms()
     // setData(data)
   }, [])
-  
+
   return (
     <Container>
     <h3 className='title'>Join Room</h3>
+    <button onCLick={()=>{JoinRoomStream()}}></button>
     {renderRooms()}
     <Link to='/auth/menu' className='box-link'>Cancel</Link>
     </Container>

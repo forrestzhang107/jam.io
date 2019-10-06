@@ -1,20 +1,20 @@
 const aws = require("aws-sdk");
 const fs = require("fs");
 const dotenv = require("dotenv");
-const creds = require('./creds.json')
+const creds = require("./creds.json");
 
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 const s3 = new aws.S3({
   region: "us-west-1",
-  accessKeyId: creds.key,
-  secretAccessKey: creds.secret
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY
 });
 
 async function uploadFile(file, filename) {
   await fs.readFile(file, (err, data) => {
     const params = {
-      Bucket: "5g-hack-vids-raw",
+      Bucket: "5ghack-vids-raw",
       Key: filename,
       Body: data
     };
@@ -25,40 +25,36 @@ async function uploadFile(file, filename) {
 }
 
 var params = {
-  Bucket: "5g-hack"
+  Bucket: "5ghack-vids"
 };
 
 function getFileListsUtil() {
   const promise = new Promise((resolve, reject) => {
     s3.listObjectsV2(params, (e, data) => {
       if (e) {
-        console.log(e, e.stack)
-        console.log('errored')
-        return reject('error')
+        console.log(e, e.stack);
+        console.log("errored");
+        return reject("error");
+      } else {
+        resolve(data);
       }
-      else {
-        resolve(data)
-      }
-    })
-  })
-  return promise
+    });
+  });
+  return promise;
 }
 
 async function getFileLists() {
-  const data = await getFileListsUtil()
-  allKeys = []
-  const contents = data.Contents
+  const data = await getFileListsUtil();
+  allKeys = [];
+  const contents = data.Contents;
   contents.forEach(content => {
-    const key = content.Key
-    if (key.split('.')[1] == 'mp4') allKeys.push(key)
-  })
-  return allKeys
-  console.log(allKeys)
-  // console.log(data)
+    const key = content.Key;
+    if (key.split(".")[1] == "mp4") allKeys.push(key);
+  });
+  return allKeys;
 }
 
-
-exports.getFileLists = getFileLists
+exports.getFileLists = getFileLists;
 
 // async function getFile(filename) {
 //   const url =  await s3.getSignedUrl("putObject", {
@@ -88,7 +84,6 @@ exports.getFileLists = getFileLists
 // }
 
 // exports.getStreamLink = getStreamLink;
-//getFileLists();
 // console.log(getStreamLink("test4"));
 // console.log(getFile("testvid1.webm"));
-//uploadFile("./6241894663.webm", "test4.webm");
+// uploadFile("./10066830510.webm", "test3.webm");

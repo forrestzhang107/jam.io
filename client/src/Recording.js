@@ -12,8 +12,6 @@ function Recording(props) {
   useEffect(() => {
     async function getStreamLink() {
     const obj = qs.parse(props.location.search);
-    console.log(obj);
-    console.log(obj['?id'])
     const filename = obj['?id']
     const streamLink = 'd1xzn1tutffqqs.cloudfront.net/' + filename
     // const data = await GetStreamLink(obj['?id'])
@@ -21,7 +19,7 @@ function Recording(props) {
     setStreamLink(streamLink)
     }
     getStreamLink();
-  }, [])
+  }, [props.location.search])
 
   return (
     <Container>

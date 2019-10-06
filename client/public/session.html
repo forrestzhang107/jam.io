@@ -8,12 +8,12 @@
     <head>
 
 
-        <script>
+        <!-- <script>
             if(!location.hash.replace('#', '').length) {
                 location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
                 location.reload();
             }
-        </script>
+        </script> -->
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
@@ -65,7 +65,10 @@
                       console.log('onOpenSocket', config)
                         var SIGNALING_SERVER = 'https://socketio-over-nodejs2.herokuapp.com:443/';
 
-                        config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
+                        // config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
+                        // config.channel = config.channel || 'channel1'
+                        config.channel = config.channel || location.hash.replace('#', '')
+                        console.log('channel', config.channel)
                         var sender = Math.round(Math.random() * 999999999) + 999999999;
 
                         io.connect(SIGNALING_SERVER).emit('new-channel', {
@@ -114,6 +117,8 @@
                     },
                     onRoomFound: function(room) {
 
+                      console.log('attempting onRoomFound')
+
                         if (onRoomFound) return
                         onRoomFound = true
 
@@ -145,7 +150,7 @@
                         }, function() {
                             joinRoomButton.disabled = false;
                         });
-                        
+
                     },
                     onRoomClosed: function(room) {
                       console.log('onRoomClosed')
@@ -160,32 +165,34 @@
                     },
                     onReady: function() {
 
+                      console.log('attempting onReady')
+
                       if (onReady) return
                       onReady = true
 
                       console.log('onReady')
 
-                      captureUserMedia(function() {
-                      conferenceUI.createRoom({
-                              roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
-                          });
-                      }, function() {
-                          btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
-                      });
+                      // captureUserMedia(function() {
+                      // conferenceUI.createRoom({
+                      //         roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
+                      //     });
+                      // }, function() {
+                      //     btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
+                      // });
 
                         // var intention = localStorage.getItem("user_intention");
                         // if(intention == "join"){
 
                         // } else{
-                        // setTimeout(()=>{
-                        //     captureUserMedia(function() {
-                        //     conferenceUI.createRoom({
-                        //             roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
-                        //         });
-                        //     }, function() {
-                        //         btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
-                        //     });
-                        // }, 3000)
+                        setTimeout(()=>{
+                            captureUserMedia(function() {
+                            conferenceUI.createRoom({
+                                    roomName: (document.getElementById('conference-name') || { }).value || 'Anonymous'
+                                });
+                            }, function() {
+                                btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
+                            });
+                        }, 2000)
 
                         // }
 

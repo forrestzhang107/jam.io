@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import {GetRooms, JoinRoom, JoinRoomStream} from './services';
+import {GetRooms, JoinRoom } from './services';
 
 function Join(props) {
 
@@ -38,7 +38,6 @@ function Join(props) {
   }
 
   async function joinRoom(room) {
-    await JoinRoomStream(room);
     await JoinRoom({objectID: room._id})
     props.history.push('/auth/room')
   }

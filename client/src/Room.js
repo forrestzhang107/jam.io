@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { GetRoom, LeaveRoom, Stream } from './services'
+import { GetRoom, LeaveRoom, UpdateRoomChannel } from './services'
 function Room(props) {
 
   const [data, setData] = useState(null)
 
   useEffect(() => {
     getData()
-    console.log("video: ", document.getElementById("video_stream"))
-    console.log("stream: ", window._stream);
-    document.getElementById("video_stream").srcObject = window._stream;
   }, [])
 
   useEffect(() => {
@@ -23,8 +20,7 @@ function Room(props) {
     <Container>
     <h3 className='title'>{data ? data.name : ''}</h3>
     {renderData()}
-    <video id="video_stream" style={{width: "92vw"}} autoPlay={true} muted={true}/>
-    <div className='box-link'>Start Session</div>
+    <div onClick={() => startSession()} className='box-link'>Start Session</div>
     <div className='box-link' onClick={() => leaveRoom()}>Leave</div>
     </Container>
   )
@@ -49,13 +45,37 @@ function Room(props) {
     }
   }
 
+  function getSessionURL(channelID) {
+    return 'https://5g-hackathon.s3-us-west-1.amazonaws.com/session.html#' + channelID
+  }
+
+  async function startSession() {
+    let channelID = data.channelID
+    if (!channelID) {
+      channelID = 'channel' + parseInt(Math.random() * 100)
+      console.log('new channelID: ' + channelID)
+      await UpdateRoomChannel(channelID)
+      window.location.href = getSessionURL(channelID)
+    }
+    else {
+      console.log('using existing channelID: ' + channelID)
+      window.location.href = getSessionURL(channelID)
+    }
+  }
+
   async function getData() {
     setData((await GetRoom()).data)
   }
+
   async function leaveRoom() {
     await LeaveRoom()
     props.history.push('/auth/menu');
   }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 }
 
 export default Room

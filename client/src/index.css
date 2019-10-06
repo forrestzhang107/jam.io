@@ -25,7 +25,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /*background-color: var(--theme-color);*/
+  overflow: hidden;
+  background-color: var(--theme-color);
 }
 
 code {

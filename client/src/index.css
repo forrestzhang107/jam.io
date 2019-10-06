@@ -21,6 +21,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   color: white;
+  background-image: url('./bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
   background-color: var(--theme-color);
 }
 

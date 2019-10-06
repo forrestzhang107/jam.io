@@ -53,3 +53,8 @@ router.post('/join-room', async (req, res) => {
   }
   res.end()
 })
+
+router.post('/update-room-channel', async (req, res) => {
+  await rooms.updateRoomChannel(req.user, req.body.channelID)
+  res.end()
+})

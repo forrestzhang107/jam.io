@@ -9,10 +9,14 @@ body {
 
 video {
 
-  height: 50%;
+  /* height: 50%;
   transform: translate(-15%);
   /* margin: auto; */
   /* width: 80%; */
   display: block;
+
+  width:100vw;
+  max-height: 50%;
+  /* margin-left:3vw */
 
 }

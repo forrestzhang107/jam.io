@@ -1,35 +1,71 @@
-const aws = require('aws-sdk')
-const fs = require('fs')
+const aws = require("aws-sdk");
+const fs = require("fs");
+const uuid = require("uuid/v1");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const s3 = new aws.S3({
-  region: 'us-west-1',
-  accessKeyId: 'AKIA5BSLTI7EMW34YDNJ',
-  secretAccessKey: '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'
-})
-
-const path = 'videos/'
+  region: "us-west-1",
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY
+});
 
 function uploadFile(file, filename) {
-  const params = {
-    Bucket: '5g-hackathon',
-    Key: path + filename,
-    Body: file
-  }
-  s3.upload(params, (e, data) => {
-    if (e) console.log(e)
-  })
+  fs.readFile(file, (err, data) => {
+    const params = {
+      Bucket: "5g-hack-vids-raw",
+      Key: filename,
+      Body: data
+    };
+    s3.upload(params, (err, data) => {
+      if (err) console.log(err);
+    });
+  });
 }
 
+var params = {
+  Bucket: "5g-hack"
+};
 
-async function getFile(filename) {
-  const params = {
-    Bucket: '5g-hackathon',
-    Key: path + filename,
-  }
- s3.getObject(params, (e, data) => {
-    if (e) console.log(e)
-    console.log(data)
-  })
+s3.listObjectsV2(params, function(err, data) {
+  allKeys = [];
+  if (err) console.log(err, err.stack);
+  else var contents = data.Contents;
+  contents.forEach(function(content) {
+    allKeys.push(content.Key);
+  });
+  // console.log(allKeys);
+  //console.log(data);
+});
+
+function getFile(filename) {
+  const url = s3.getSignedUrl("putObject", {
+    Bucket: "5g-hack",
+    Key: filename
+  });
+  return url;
 }
 
-uploadFile('just a string', 'test3.txt')
+function getFileLink(filename) {
+  return new Promise(function(resolve, reject) {
+    var options = {
+      keypairId: process.env.ACCESS_KEY_ID,
+      privateKeyPath: process.env.SECRET_ACCESS_KEY
+    };
+    var signedUrl = awsCloudFront.getSignedUrl(
+      process.env.CLOUDFRONT_URL + filename,
+      options
+    );
+    resolve(signedUrl);
+  });
+}
+
+function getStreamLink(filename) {
+  const filepath = filename + "/" + filename + ".mp4";
+  return process.env.CLOUDFRONT_URL + filepath;
+}
+
+// console.log(getStreamLink("test4"));
+// console.log(getFile("testvid1.webm"));
+//uploadFile("./6241894663.webm", "test4.webm");

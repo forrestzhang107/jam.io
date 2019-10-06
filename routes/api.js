@@ -38,3 +38,13 @@ router.post('/leave-room', async (req, res)=> {
   await rooms.leaveRoom(req.user)
   res.end()
 })
+
+router.post('/join-room', async (req, res) => {
+  if (req.user) {
+    await rooms.joinRoom({
+      ...req.body,
+      user: req.user
+    })
+  }
+  res.end()
+})

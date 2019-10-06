@@ -75,6 +75,10 @@ input:focus, textarea:focus {
   outline: none;
 }
 
+button {
+  color: white;
+}
+
 .box-link {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -109,10 +113,30 @@ h3 {
 }
 
 .row {
-  display: block;
-  margin-right: inherit;
-  margin-left: inherit;
+  /* display: block; */
+  margin-right: -8px;
+  margin-left: -8px;
 }
 .box-link{
   background-color: green;
+}
+.col-6 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.room{
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  /* margin-left: 5px;
+  margin-right: 5px; */
+  margin-bottom: 16px;
+}
+
+.disabled {
+  color: #aaa;
 }

@@ -30,7 +30,11 @@ var config = {
     };
 
     socket.on('message', config.onmessage);
-  }
+  },
+  onRemoteStream: function(event) {
+    console.log("event");
+       document.body.appendChild(event.media);
+   }
 }
 
 export function Stream(){
@@ -67,15 +71,20 @@ export function CreateRoomStream(){
 }
 
 export function JoinRoomStream(room_info){
+  console.log("in join room stream: ", room_info);
   var promise = new Promise((resolve, reject)=>{
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(function(camera) {
       config.attachStream = camera;
       window._stream = camera;
       console.log("window._stream: ", window._stream);
+      console.log("room_info: ", {
+            roomToken: room_info.broadcaster,
+            joinUser: room_info.broadcaster
+        })
       var conf = conference(config);
       conf.joinRoom({
-            roomToken: "40199874-63ab-173e-89d6-6179d67ec715",
-            joinUser: "33538bbe-d3ce-be85-f5a8-52dbd8f08c47"
+            roomToken: room_info.broadcaster,
+            joinUser: room_info.broadcaster
         });
       resolve();
     });
@@ -93,4 +102,12 @@ export function InRoom(){
 
 export function LeaveRoom(){
   return axios.post('/api/leave-room');
+}
+
+export function GetRooms(){
+  return axios.get('/api/get-rooms');
+}
+
+export function JoinRoom(payload) {
+  return axios.post('/api/join-room', payload)
 }

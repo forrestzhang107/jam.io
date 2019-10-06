@@ -46,6 +46,19 @@ exports.leaveRoom = leaveRoom
 
 async function updateRoom(objectID, payload) {
   await mongo.collection('rooms').updateOne({
-    '_id': ObjectID(objectID)
+    _id: ObjectID(objectID)
   }, {$set: {...payload}})
 }
+
+async function getRoomFromID(objectID) {
+  return await mongo.collection('rooms').findOne({_id: ObjectID(objectID)})
+}
+
+async function joinRoom(payload) {
+  const room = await getRoomFromID(payload.objectID)
+  const members = room.members
+  members.push(payload.user)
+  await updateRoom(room._id, {members: members})
+}
+
+exports.joinRoom = joinRoom

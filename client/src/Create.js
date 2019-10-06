@@ -25,7 +25,7 @@ function Create(props) {
         value={desc}
         onChange={evt => setDesc(evt.target.value)} />
       </label><br/>
-    <button type="submit" className='box-link' onClick={() =>createRoom()} disabled={!name}>Create</button>
+    <button type="submit" className={'box-link ' + (name ? '' : 'disabled')}>Create</button>
     </form>
     <Link to='/auth/menu' className='box-link'>Cancel</Link>
     </Container>

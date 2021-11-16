@@ -19,7 +19,7 @@
   "homepage": "https://github.com/forrestzhang107/5g-hackathon#readme",
   "dependencies": {
     "@cloudant/cloudant": "^4.2.1",
-    "aws-sdk": "^2.543.0",
+    "aws-sdk": "^2.814.0",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.2",
     "dotenv": "^8.1.0",
